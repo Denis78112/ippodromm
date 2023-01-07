@@ -3,6 +3,28 @@ from tkinter import *
 # МЕТОДЫ И ФУНКЦИИ
 #*******************************************************
 
+#Информация о средствах игрока
+def loadMoney():
+    try:
+        f = open("money.dat", "r")
+        m = int(f.readline())
+        f.close()
+    except FileNotFoundError:
+        print(f"Файла не существует, задано значение {defaultMoney} {valuta}")
+        m = defaultMoney
+    return m
+
+def saveMoney(moneyToSave):
+    try:
+        f = open("money.dat", "w")
+        f.write(str(moneyToSave))
+        f.close()
+    except:
+        print(f"Ошибка создания файла, наш Ипподром закрывается!")
+        quit(0)
+
+
+
 #Метод вывода лошадей
 def horsePlaseInWindow():
     horse01.place(x=int(x01), y=20)
@@ -18,11 +40,16 @@ def insertText(s):
 
 
 root = Tk()
+
 #Значение переменных
 x01 = 20
 x02 = 20
 x03 = 20
 x04 = 20
+
+defaultMoney = 10000
+money = 0
+valuta = "руб."
 
 #*************************************************************
 #ФОРМИРУЕМ ВСЕ ЭЛЕМЕНТЫ ОКНА
@@ -69,6 +96,9 @@ scroll = Scrollbar(command=textDiary.yview, width=20)
 scroll.place(x=990, y=450, height=132)
 textDiary["yscrollcommand"] = scroll.set
 
+money = loadMoney()
+labelAllMoney = Label(text=f"Осталось средств: {money} {valuta}.", font="Arial 12")
+labelAllMoney.place(x=20, y=565)
 
 
 root.mainloop()
