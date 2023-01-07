@@ -10,6 +10,13 @@ def horsePlaseInWindow():
     horse03.place(x=int(x01), y=180)
     horse04.place(x=int(x01), y=260)
 
+#Строка чата
+def insertText(s):
+    textDiary.insert(INSERT, s + "\n")
+    textDiary.see(END)
+
+
+
 root = Tk()
 #Значение переменных
 x01 = 20
@@ -61,5 +68,7 @@ textDiary.place(x=430, y=450)
 scroll = Scrollbar(command=textDiary.yview, width=20)
 scroll.place(x=990, y=450, height=132)
 textDiary["yscrollcommand"] = scroll.set
+
+
 
 root.mainloop()
