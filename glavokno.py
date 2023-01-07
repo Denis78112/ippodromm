@@ -1,4 +1,6 @@
 from tkinter import *
+from tkinter import messagebox
+
 #*******************************************************
 # МЕТОДЫ И ФУНКЦИИ
 #*******************************************************
@@ -6,7 +8,7 @@ from tkinter import *
 #Информация о средствах игрока
 def loadMoney():
     try:
-        f = open("money.dat", "r")
+        f = open("money.txt", "r")
         m = int(f.readline())
         f.close()
     except FileNotFoundError:
@@ -97,6 +99,10 @@ scroll.place(x=990, y=450, height=132)
 textDiary["yscrollcommand"] = scroll.set
 
 money = loadMoney()
+if (money <= 0):
+    messagebox.showinfo("Стоп!", "На ипподром без денег входить нельзя!")
+    quit(0)
+
 labelAllMoney = Label(text=f"Осталось средств: {money} {valuta}.", font="Arial 12")
 labelAllMoney.place(x=20, y=565)
 
