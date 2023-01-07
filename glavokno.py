@@ -50,4 +50,16 @@ horse04_image = PhotoImage(file="horse04.png")
 horse04 = Label(root, image=horse04_image)
 # horse01.place(x=int(x01), y=20)
 horsePlaseInWindow()
+
+#Кнопака старт
+startButton = Button(text="СТАРТ", font="arial 20", width=61, background="#37AA37")
+startButton.place(x=20, y=370)
+
+#Чат с информацией
+textDiary = Text(width=70, height=8, wrap=WORD)
+textDiary.place(x=430, y=450)
+scroll = Scrollbar(command=textDiary.yview, width=20)
+scroll.place(x=990, y=450, height=132)
+textDiary["yscrollcommand"] = scroll.set
+
 root.mainloop()
