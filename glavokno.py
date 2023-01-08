@@ -1,5 +1,7 @@
 from tkinter import *
 from tkinter import messagebox
+from tkinter import ttk
+
 
 #*******************************************************
 # МЕТОДЫ И ФУНКЦИИ
@@ -44,6 +46,10 @@ def insertText(s):
 root = Tk()
 
 #Значение переменных
+
+WIDTH = 1024
+HEIGHT = 600
+
 x01 = 20
 x02 = 20
 x03 = 20
@@ -63,8 +69,7 @@ valuta = "руб."
 #*************************************************************
 
 #размеры окна
-WIDTH = 1024
-HEIGHT = 600
+
 POS_X = root.winfo_screenwidth() // 2 - WIDTH // 2
 POS_Y = root.winfo_screenheight() // 2 - HEIGHT // 2
 #Заголовок
@@ -76,6 +81,7 @@ root.geometry(f"{WIDTH}x{HEIGHT}+{POS_X}+{POS_Y}")
 road_image = PhotoImage(file="road.png")
 road = Label(root, image=road_image)
 road.place(x=0, y=17)
+
 #Выводим лошадей
 # x01 = 20 #координата для первой лошади
 horse01_image = PhotoImage(file="horse01.png")
@@ -145,5 +151,26 @@ horse04Game = BooleanVar()
 horse04Game.set(0)
 horseCheck04 = Checkbutton(text=nameHorse04, variable=horse04Game, onvalue=1, offvalue=0)
 horseCheck04.place(x=150, y=538)
+
+#Выпадающий список
+stavka01 = ttk.Combobox(root)
+stavka02 = ttk.Combobox(root)
+stavka03 = ttk.Combobox(root)
+stavka04 = ttk.Combobox(root)
+
+#Задаем атрибут только чтение
+
+stavka01["state"] = "readonly"
+stavka01.place(x=280, y=450)
+
+stavka02["state"] = "readonly"
+stavka02.place(x=280, y=480)
+
+stavka03["state"] = "readonly"
+stavka03.place(x=280, y=510)
+
+stavka04["state"] = "readonly"
+stavka04.place(x=280, y=540)
+
 
 root.mainloop()
