@@ -18,7 +18,7 @@ def loadMoney():
 
 def saveMoney(moneyToSave):
     try:
-        f = open("money.dat", "w")
+        f = open("money.txt", "w")
         f.write(str(moneyToSave))
         f.close()
     except:
@@ -48,6 +48,11 @@ x01 = 20
 x02 = 20
 x03 = 20
 x04 = 20
+#Клички лошадей
+nameHorse01 = "Ананас"
+nameHorse02 = "Сталкер"
+nameHorse03 = "Пирожок"
+nameHorse04 = "Копытце"
 
 defaultMoney = 10000
 money = 0
@@ -106,5 +111,39 @@ if (money <= 0):
 labelAllMoney = Label(text=f"Осталось средств: {money} {valuta}.", font="Arial 12")
 labelAllMoney.place(x=20, y=565)
 
+#Текст и чекбоксы для лошадей.
+
+labelHorse01 = Label(text="Ставка на лошать №1")
+labelHorse01.place(x=20, y=450)
+
+labelHorse02 = Label(text="Ставка на лошать №2")
+labelHorse02.place(x=20, y=480)
+
+labelHorse03 = Label(text="Ставка на лошать №3")
+labelHorse03.place(x=20, y=510)
+
+labelHorse04 = Label(text="Ставка на лошать №4")
+labelHorse04.place(x=20, y=540)
+
+#Чекбоксы для лошадок
+horse01Game = BooleanVar()
+horse01Game.set(0)
+horseCheck01 = Checkbutton(text=nameHorse01, variable=horse01Game, onvalue=1, offvalue=0)
+horseCheck01.place(x=150, y=448)
+
+horse02Game = BooleanVar()
+horse02Game.set(0)
+horseCheck02 = Checkbutton(text=nameHorse02, variable=horse02Game, onvalue=1, offvalue=0)
+horseCheck02.place(x=150, y=478)
+
+horse03Game = BooleanVar()
+horse03Game.set(0)
+horseCheck03 = Checkbutton(text=nameHorse03, variable=horse03Game, onvalue=1, offvalue=0)
+horseCheck03.place(x=150, y=508)
+
+horse04Game = BooleanVar()
+horse04Game.set(0)
+horseCheck04 = Checkbutton(text=nameHorse04, variable=horse04Game, onvalue=1, offvalue=0)
+horseCheck04.place(x=150, y=538)
 
 root.mainloop()
