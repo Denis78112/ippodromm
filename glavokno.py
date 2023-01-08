@@ -8,6 +8,39 @@ from tkinter import ttk
 #*******************************************************
 
 #ФУНКЦИЯ РАСЧЕТА СТАВКИ
+#вызыввается каждый раз при выборе любого Combobox
+
+
+#Функция расчета остстака от предыдущей ставки
+def refreshCombo(eventOject):
+    summ = summ01.get() + summ02.get() + summ03.get() + summ04.get()
+    labelAllMoney["text"] = f"у вас на счету: {int(money - summ)} {valuta}"
+
+    stavka01["values"] = getValues(int(money - summ02.get() - summ03.get() - summ04.get()))
+    stavka02["values"] = getValues(int(money - summ01.get() - summ03.get() - summ04.get()))
+    stavka03["values"] = getValues(int(money - summ02.get() - summ01.get() - summ04.get()))
+    stavka04["values"] = getValues(int(money - summ02.get() - summ03.get() - summ01.get()))
+
+    if (summ01.get() > 0):
+        horse01Game.set(True)
+    else:
+        horse01Game.set(False)
+
+    if (summ02.get() > 0):
+        horse02Game.set(True)
+    else:
+        horse02Game.set(False)
+
+    if (summ03.get() > 0):
+        horse03Game.set(True)
+    else:
+        horse03Game.set(False)
+
+    if (summ04.get() > 0):
+        horse04Game.set(True)
+    else:
+        horse04Game.set(False)
+#Список занчений для Combobox
 
 def getValues(summa):
     value = []
@@ -57,8 +90,9 @@ def insertText(s):
 
 
 root = Tk()
-
+#********************************************
 #Значение переменных
+#********************************************
 
 WIDTH = 1024
 HEIGHT = 600
@@ -185,5 +219,34 @@ stavka03.place(x=280, y=510)
 stavka04["state"] = "readonly"
 stavka04.place(x=280, y=540)
 
+#Определяем переменные для хранения значений Combobox
+
+summ01 = IntVar()
+summ02 = IntVar()
+summ03 = IntVar()
+summ04 = IntVar()
+
+#привязываем переменные Combobox
+
+stavka01["textvariable"] = summ01
+stavka02["textvariable"] = summ02
+stavka03["textvariable"] = summ03
+stavka04["textvariable"] = summ04
+
+stavka01.bind("<<ComboboxSelected>>", refreshCombo)
+stavka02.bind("<<ComboboxSelected>>", refreshCombo)
+stavka03.bind("<<ComboboxSelected>>", refreshCombo)
+stavka04.bind("<<ComboboxSelected>>", refreshCombo)
+
+#Обновляем занчение combobox
+
+refreshCombo("")
+
+#устанавливаем самое первое значение списка
+
+stavka01.current(0)
+stavka02.current(0)
+stavka03.current(0)
+stavka04.current(0)
 
 root.mainloop()
