@@ -7,6 +7,19 @@ from tkinter import ttk
 # МЕТОДЫ И ФУНКЦИИ
 #*******************************************************
 
+#ФУНКЦИЯ РАСЧЕТА СТАВКИ
+
+def getValues(summa):
+    value = []
+    if (summa > 9):
+        for i in range(0, 11):
+            value.append(i * (int(summa) // 10))
+    else:
+        value.append(0)
+        if (summa > 0):
+            value.append(summa)
+    return value
+
 #Информация о средствах игрока
 def loadMoney():
     try:
