@@ -1,11 +1,43 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+from random import randint
+
 
 
 #*******************************************************
 # МЕТОДЫ И ФУНКЦИИ
 #*******************************************************
+
+#движение лошадей
+def moveHorse:
+    global x01, x02, x03, x04
+
+    speed01 = randint(3, 10) / 10
+    speed02 = randint(3, 10) / 10
+    speed03 = randint(3, 10) / 10
+    speed04 = randint(3, 10) / 10
+
+    x01 +=(speed01 * randint(1, (7 - state01))) / state01
+    x02 += (speed02 * randint(1, (7 - state02))) / state02
+    x01 += (speed03 * randint(1, (7 - state03))) / state03
+    x01 += (speed04 * randint(1, (7 - state04))) / state04
+
+    horsePlaсeInWindow()
+
+    if (x01 < 952 and x02 < 952 and x03 < 952 and x04 < 952):
+        root.after(5, moveHorse)
+
+#При нажатии кнопки Старт
+def runHorse():
+    global money
+    startButton["state"] = "disabled"
+    stavka01["state"] = "disabled"
+    stavka02["state"] = "disabled"
+    stavka03["state"] = "disabled"
+    stavka04["state"] = "disabled"
+    money -= summ01.get() + summ02.get() + summ03.get() + summ04.get()
+    moveHorse()
 
 #ФУНКЦИЯ РАСЧЕТА СТАВКИ
 #вызыввается каждый раз при выборе любого Combobox
@@ -40,6 +72,7 @@ def refreshCombo(eventOject):
         horse04Game.set(True)
     else:
         horse04Game.set(False)
+
 #Список занчений для Combobox
 
 def getValues(summa):
@@ -76,7 +109,7 @@ def saveMoney(moneyToSave):
 
 
 #Метод вывода лошадей
-def horsePlaseInWindow():
+def horsePlaсeInWindow():
     horse01.place(x=int(x01), y=20)
     horse02.place(x=int(x01), y=100)
     horse03.place(x=int(x01), y=180)
