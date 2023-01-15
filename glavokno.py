@@ -10,7 +10,7 @@ from random import randint
 #*******************************************************
 
 #движение лошадей
-def moveHorse:
+def moveHorse():
     global x01, x02, x03, x04
 
     speed01 = randint(3, 10) / 10
@@ -18,7 +18,7 @@ def moveHorse:
     speed03 = randint(3, 10) / 10
     speed04 = randint(3, 10) / 10
 
-    x01 +=(speed01 * randint(1, (7 - state01))) / state01
+    x01 += (speed01 * randint(1, (7 - state01))) / state01
     x02 += (speed02 * randint(1, (7 - state02))) / state02
     x01 += (speed03 * randint(1, (7 - state03))) / state03
     x01 += (speed04 * randint(1, (7 - state04))) / state04
@@ -42,8 +42,6 @@ def runHorse():
 #ФУНКЦИЯ РАСЧЕТА СТАВКИ
 #вызыввается каждый раз при выборе любого Combobox
 
-
-#Функция расчета остстака от предыдущей ставки
 def refreshCombo(eventOject):
     summ = summ01.get() + summ02.get() + summ03.get() + summ04.get()
     labelAllMoney["text"] = f"у вас на счету: {int(money - summ)} {valuta}"
@@ -52,6 +50,12 @@ def refreshCombo(eventOject):
     stavka02["values"] = getValues(int(money - summ01.get() - summ03.get() - summ04.get()))
     stavka03["values"] = getValues(int(money - summ02.get() - summ01.get() - summ04.get()))
     stavka04["values"] = getValues(int(money - summ02.get() - summ03.get() - summ01.get()))
+
+    if (summ > 0):
+        startButton["state"] = "normal"
+    else:
+        startButton["state"] = "disabled"
+
 
     if (summ01.get() > 0):
         horse01Game.set(True)
@@ -176,7 +180,8 @@ horse03 = Label(root, image=horse03_image)
 horse04_image = PhotoImage(file="horse04.png")
 horse04 = Label(root, image=horse04_image)
 # horse01.place(x=int(x01), y=20)
-horsePlaseInWindow()
+
+horsePlaсeInWindow()
 
 #Кнопака старт
 startButton = Button(text="СТАРТ", font="arial 20", width=61, background="#37AA37")
@@ -281,5 +286,15 @@ stavka01.current(0)
 stavka02.current(0)
 stavka03.current(0)
 stavka04.current(0)
+
+#УДАЛИТЬ
+stavka01.current(1)
+refreshCombo("")
+startButton["command"] = runHorse
+
+state01 = randint(1, 5)
+state02 = randint(1, 5)
+state03 = randint(1, 5)
+state04 = randint(1, 5)
 
 root.mainloop()
